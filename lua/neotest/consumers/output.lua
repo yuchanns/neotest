@@ -114,16 +114,10 @@ local init = function()
       for _, node in positions:iter_nodes() do
         local pos = node:data()
         local range = node:closest_value_for("range")
-        if
-          pos.type == "test"
-          and results[pos.id]
-          and results[pos.id].status == "failed"
-          and range[1] <= line
-          and range[3] >= line
-        then
+        if pos.type == "test" and results[pos.id] and range[1] <= line and range[3] >= line then
           open_output(
             results[pos.id],
-            { short = config.output.open_on_run == "short", enter = false, quiet = true }
+            { short = config.output.open_on_run == "short", enter = true, quiet = true }
           )
         end
       end
